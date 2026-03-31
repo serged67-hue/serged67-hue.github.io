@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — MusicLibrarian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #1a0533;
+            color: #e5e7eb;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .updated {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            color: #a855f7;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        p, li {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #a855f7;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back {
+            display: inline-block;
+            margin-top: 3rem;
+            color: #a855f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: March 31, 2026</p>
+
+        <p>MusicLibrarian ("the App") is developed by TheVaultDJ. This privacy policy explains how the App handles your data.</p>
+
+        <h2>Data Collection</h2>
+        <p>MusicLibrarian does <strong>not</strong> collect, store, transmit, or share any personal data. The App runs entirely on your Mac and does not communicate with any external server.</p>
+
+        <h2>Apple Music Library Access</h2>
+        <p>The App uses Apple's ITunesLibrary framework and MusicKit to read your Apple Music library metadata (track titles, artists, albums, ratings, file information). This data is:</p>
+        <ul>
+            <li>Read locally on your Mac only</li>
+            <li>Never transmitted to any server</li>
+            <li>Never stored outside of the App's process</li>
+            <li>Used solely to provide the App's features (duplicate detection, rating management, health diagnostics)</li>
+        </ul>
+
+        <h2>MusicKit (Apple Music API)</h2>
+        <p>The App uses MusicKit to search the Apple Music catalog for ISRC codes and catalog matches. These requests are made directly to Apple's servers using your Apple Music subscription credentials, managed entirely by Apple's frameworks. TheVaultDJ does not have access to your Apple Music account credentials.</p>
+
+        <h2>ShazamKit</h2>
+        <p>The App uses ShazamKit to identify audio content via microphone capture. Audio is processed locally and sent to Apple's Shazam recognition service. No audio recordings are stored by the App.</p>
+
+        <h2>Microphone Access</h2>
+        <p>The App requests microphone access solely for the Shazam audio verification feature. Microphone input is used in real-time for audio matching and is never recorded, stored, or transmitted by the App.</p>
+
+        <h2>Accessibility Permissions</h2>
+        <p>The App requests Accessibility permissions to automate actions in Apple Music (such as Remove Download and Download). These permissions are used solely to interact with the Music.app interface on your behalf.</p>
+
+        <h2>License Keys</h2>
+        <p>License keys are validated offline using your Mac's hardware identifier. No license data is transmitted to any server. Your hardware identifier is used solely for license validation and is never collected or shared.</p>
+
+        <h2>Analytics & Tracking</h2>
+        <p>MusicLibrarian does <strong>not</strong> include any analytics, telemetry, tracking, or crash reporting frameworks. No usage data is collected.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>The App does not integrate any third-party services, SDKs, or advertising frameworks. The only external communications are with Apple's own services (MusicKit, ShazamKit) through Apple's official frameworks.</p>
+
+        <h2>Data Storage</h2>
+        <p>The App stores the following data locally on your Mac:</p>
+        <ul>
+            <li>ISRC analysis cache (in ~/Library/Application Support/MusicLibrarian/)</li>
+            <li>Duplicate resolution state (in ~/Library/Application Support/MusicLibrarian/)</li>
+            <li>License key (in macOS Keychain)</li>
+            <li>Modification log (for undo/rollback purposes)</li>
+        </ul>
+        <p>All data remains on your Mac and can be deleted at any time by removing the App.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>The App is not directed at children under 13 and does not knowingly collect any data from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about this privacy policy, contact us at <a href="https://www.youtube.com/@TheVaultDJ67">TheVaultDJ on YouTube</a>.</p>
+
+        <a href="index.html" class="back">&larr; Back to MusicLibrarian</a>
+    </div>
+</body>
+</html>
