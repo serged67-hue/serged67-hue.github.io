@@ -1592,6 +1592,9 @@
           <p class="pricing-card__guarantee" data-i18n="pricing.pro.guarantee">30-day money-back guarantee.</p>
         </div>
       </div>
+      <p id="download-counter" style="text-align:center; margin-top:32px; font-size:15px; color:var(--text-secondary); font-weight:600; opacity:0; transition: opacity 0.5s;">
+        <span style="font-size:20px; color:var(--accent-green);" id="dl-count">0</span>+ <span data-i18n="pricing.downloads">downloads since launch</span>
+      </p>
     </div>
   </section>
 
@@ -1795,6 +1798,7 @@
         "compare.shazam": "V\u00e9rification Shazam",
         "compare.price": "Prix",
         "compare.ourprice": "Gratuit / 29,99$ Pro",
+        "pricing.downloads": "t\u00e9l\u00e9chargements depuis le lancement",
         "pricing.title": "Un prix. Pas d\u2019abonnement. Jamais.",
         "pricing.subtitle": "Essayez tout gratuitement. Passez au Pro quand votre biblioth\u00e8que l\u2019exige.",
         "pricing.free.name": "Gratuit",
@@ -1868,6 +1872,21 @@
       var saved = localStorage.getItem('ml-lang');
       var browserFr = navigator.language.startsWith('fr');
       if (saved === 'fr' || (!saved && browserFr)) setLang('fr');
+
+      // Fetch download count from GitHub
+      fetch('https://api.github.com/repos/serged67-hue/serged67-hue.github.io/releases')
+        .then(r => r.json())
+        .then(releases => {
+          var total = 0;
+          releases.forEach(function(r) {
+            (r.assets || []).forEach(function(a) { total += a.download_count; });
+          });
+          if (total > 0) {
+            document.getElementById('dl-count').textContent = total;
+            document.getElementById('download-counter').style.opacity = '1';
+          }
+        })
+        .catch(function() {});
     });
   </script>
 
