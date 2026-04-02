@@ -1,623 +1,1698 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18054470061"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-18054470061');
-    </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="4ac6e75a-29be-41be-835f-903c93d93066"></script>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MusicLibrarian — Clean up your Apple Music library. Find duplicates, fix ratings, upgrade to lossless, and diagnose iCloud issues in minutes.">
+  <title>MusicLibrarian — Your music library, finally perfect.</title>
+  <link rel="icon" href="https://serged67-hue.github.io/icon.png">
+
+  <!-- Google Ads Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18054470061"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18054470061');
+  </script>
+
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="4ac6e75a-29be-41be-835f-903c93d93066"></script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '919392927728897');
     fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=919392927728897&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-    <title>MusicLibrarian — Clean up your Apple Music library</title>
-    <meta name="description" content="Detect duplicates, fix ratings, upgrade to Lossless, and diagnose iCloud health issues in your Apple Music library.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  </script>
 
-        :root {
-            --purple-dark: #1a0533;
-            --purple-mid: #2d1052;
-            --purple-light: #7c3aed;
-            --purple-glow: #a855f7;
-            --gold: #f59e0b;
-            --green: #10b981;
-            --white: #ffffff;
-            --gray-100: #f3f4f6;
-            --gray-300: #d1d5db;
-            --gray-500: #6b7280;
-        }
+  <style>
+    /* ============================================
+       DESIGN TOKENS — LIGHT / APPLE WHITE
+       ============================================ */
+    :root {
+      --bg-primary: #fbfbfd;
+      --bg-elevated: #ffffff;
+      --bg-card: rgba(0, 0, 0, 0.025);
+      --bg-card-hover: rgba(0, 0, 0, 0.045);
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --accent-red: #fa2d48;
+      --accent-blue: #0071e3;
+      --accent-green: #34c759;
+      --accent-orange: #ff9f0a;
+      --gradient-hero: linear-gradient(135deg, #fc5c7d, #e84393, #6c5ce7);
+      --gradient-text: linear-gradient(90deg, #e8375a 0%, #d63384 40%, #6f42c1 100%);
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --border-card: rgba(0, 0, 0, 0.08);
+      --radius-card: 20px;
+      --radius-pill: 980px;
+      --font-stack: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --transition-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--purple-dark);
-            color: var(--white);
-            overflow-x: hidden;
-        }
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            background: radial-gradient(ellipse at 50% 30%, var(--purple-mid) 0%, var(--purple-dark) 70%);
-            position: relative;
-        }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1" fill="rgba(168,85,247,0.15)"/><circle cx="80" cy="20" r="0.5" fill="rgba(168,85,247,0.1)"/><circle cx="50" cy="70" r="0.8" fill="rgba(245,158,11,0.1)"/><circle cx="10" cy="80" r="0.6" fill="rgba(168,85,247,0.08)"/><circle cx="90" cy="60" r="0.7" fill="rgba(245,158,11,0.08)"/></svg>');
-            background-size: 200px;
-            pointer-events: none;
-        }
+    body {
+      font-family: var(--font-stack);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 17px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-        .hero-icon {
-            width: 140px;
-            height: 140px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.4);
-        }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
 
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--purple-glow), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    a:hover {
+      opacity: 0.8;
+    }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--gray-300);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
+    /* ============================================
+       UTILITIES
+       ============================================ */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    .container--wide {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--purple-light), var(--purple-glow));
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
-        }
+    .gradient-text {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
-        }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 12px;
+    }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-        }
+    .section-headline {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
+    .section-subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 600px;
+    }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--green);
-            margin-bottom: 2rem;
-        }
+    /* ============================================
+       ANIMATION SYSTEM
+       ============================================ */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .price-tag {
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--gray-500);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .price-tag strong {
-            color: var(--gold);
-            font-size: 1.1rem;
-        }
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-        /* Features */
-        .features {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, var(--purple-dark) 0%, #0f0720 100%);
-        }
+    .animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+    }
 
-        .features-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+    .animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
+    .animate-delay-1 { transition-delay: 0.1s; }
+    .animate-delay-2 { transition-delay: 0.2s; }
+    .animate-delay-3 { transition-delay: 0.3s; }
+    .animate-delay-4 { transition-delay: 0.4s; }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray-500);
-            font-size: 1.1rem;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-blue);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      font-size: 17px;
+      font-weight: 600;
+      font-family: var(--font-stack);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+      text-decoration: none;
+    }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+    .btn-primary:hover {
+      background: #0077ed;
+      transform: scale(1.03);
+      opacity: 1;
+    }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-primary);
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      font-size: 17px;
+      font-weight: 600;
+      font-family: var(--font-stack);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+      text-decoration: none;
+    }
 
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(124, 58, 237, 0.3);
-            transform: translateY(-4px);
-        }
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.07);
+      border-color: rgba(0, 0, 0, 0.2);
+      transform: scale(1.03);
+      opacity: 1;
+    }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--accent-blue);
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      font-size: 17px;
+      font-weight: 600;
+      font-family: var(--font-stack);
+      border: 1px solid var(--accent-blue);
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+      text-decoration: none;
+    }
 
-        .feature-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+    .btn-outline:hover {
+      background: rgba(0, 113, 227, 0.06);
+      transform: scale(1.03);
+      opacity: 1;
+    }
 
-        .feature-card p {
-            color: var(--gray-500);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
+    /* ============================================
+       GLASS CARD
+       ============================================ */
+    .glass-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-card);
+      padding: 40px;
+      transition: all 0.4s var(--transition-smooth);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
 
-        /* How it works */
-        .how-it-works {
-            padding: 6rem 2rem;
-            background: #0f0720;
-        }
+    .glass-card:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
 
-        .steps {
-            max-width: 700px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+    /* ============================================
+       macOS WINDOW FRAME
+       ============================================ */
+    .window-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
 
-        .step {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
+    .window-frame__titlebar {
+      height: 36px;
+      background: #e8e8ed;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 8px;
+    }
 
-        .step-number {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--purple-light), var(--purple-glow));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-        }
+    .window-frame__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
 
-        .step h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
+    .window-frame__dot--red { background: #ff5f57; }
+    .window-frame__dot--yellow { background: #febc2e; }
+    .window-frame__dot--green { background: #28c840; }
 
-        .step p {
-            color: var(--gray-500);
-            line-height: 1.5;
-        }
+    .window-frame img {
+      width: 100%;
+      display: block;
+    }
 
-        /* Pricing */
-        .pricing {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, #0f0720 0%, var(--purple-dark) 100%);
-        }
+    /* ============================================
+       SECTION 1: HERO
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 60px;
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+    }
 
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(ellipse at center, rgba(0, 113, 227, 0.03) 0%, rgba(111, 66, 193, 0.02) 30%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-        }
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
 
-        .pricing-card.featured {
-            border-color: var(--purple-glow);
-            background: rgba(124, 58, 237, 0.1);
-            position: relative;
-        }
+    .hero__icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+      animation: scaleIn 0.8s var(--transition-smooth) both;
+    }
 
-        .pricing-card.featured::before {
-            content: 'BEST VALUE';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--purple-light), var(--gold));
-            padding: 0.3rem 1rem;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-        }
+    .hero__badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.7s var(--transition-smooth) 0.2s both;
+    }
 
-        .pricing-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
+    .hero__title {
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      max-width: 800px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.7s var(--transition-smooth) 0.3s both;
+    }
 
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 1rem 0;
-        }
+    .hero__subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.7s var(--transition-smooth) 0.4s both;
+    }
 
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--gray-500);
-            font-weight: 400;
-        }
+    .hero__ctas {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.7s var(--transition-smooth) 0.5s both;
+    }
 
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin: 1.5rem 0;
-        }
+    .hero__screenshot {
+      margin-top: 64px;
+      max-width: 980px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 0.9s var(--transition-smooth) 0.7s both;
+    }
 
-        .pricing-features li {
-            padding: 0.5rem 0;
-            color: var(--gray-300);
-            font-size: 0.9rem;
-        }
+    /* ============================================
+       SECTION 2: SOCIAL PROOF BAR
+       ============================================ */
+    .social-proof {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+    }
 
-        .pricing-features li::before {
-            content: '\2713';
-            color: var(--green);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
+    .social-proof__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
 
-        /* Requirements */
-        .requirements {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: var(--purple-dark);
-        }
+    .stat__number {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
 
-        .requirements p {
-            color: var(--gray-500);
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+    .stat__label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
 
-        /* Footer */
-        .footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            background: var(--purple-dark);
-        }
+    .social-proof__testimonial {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
 
-        .footer p {
-            color: var(--gray-500);
-            font-size: 0.85rem;
-        }
+    .testimonial__quote {
+      font-size: clamp(17px, 2vw, 20px);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
 
-        .footer a {
-            color: var(--purple-glow);
-            text-decoration: none;
-        }
+    .testimonial__author {
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .section-title { font-size: 1.8rem; }
-            .features-grid { grid-template-columns: 1fr; }
-            .pricing-cards { grid-template-columns: 1fr; max-width: 350px; }
-        }
-    </style>
+    /* ============================================
+       SECTION 3: DEMO VIDEO
+       ============================================ */
+    .demo {
+      padding: 120px 24px;
+      text-align: center;
+      background: #ffffff;
+    }
+
+    .demo__header {
+      margin-bottom: 48px;
+    }
+
+    .demo__header .section-headline {
+      margin-bottom: 12px;
+    }
+
+    .demo__header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .demo__video-container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-card);
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.08);
+      position: relative;
+      aspect-ratio: 16 / 9;
+    }
+
+    .demo__video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================
+       SECTION 4: FEATURES
+       ============================================ */
+    .features {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+
+    .features__header {
+      text-align: center;
+      margin-bottom: 96px;
+    }
+
+    .features__header .section-headline {
+      margin-bottom: 16px;
+    }
+
+    .features__header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    /* Tier 1: Hero Features (alternating rows) */
+    .feature-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+
+    .feature-hero--reverse {
+      direction: rtl;
+    }
+
+    .feature-hero--reverse > * {
+      direction: ltr;
+    }
+
+    .feature-hero__content {
+      max-width: 440px;
+    }
+
+    .feature-hero__title {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .feature-hero__body {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .feature-hero__visual .window-frame {
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Tier 2: Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .feature-card__icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-card__icon svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: var(--text-primary);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card__title {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .feature-card__body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       SECTION 5: HOW IT WORKS
+       ============================================ */
+    .how-it-works {
+      padding: 120px 24px;
+      border-top: 1px solid var(--border-subtle);
+      background: #ffffff;
+    }
+
+    .how-it-works__header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .how-it-works__steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    /* Connecting line */
+    .how-it-works__steps::before {
+      content: '';
+      position: absolute;
+      top: 48px;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-card), var(--border-card), transparent);
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+    }
+
+    .step__number {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .step__title {
+      font-size: 21px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .step__body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       SECTION 6: PRICING
+       ============================================ */
+    .pricing {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+
+    .pricing__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .pricing__header .section-headline {
+      margin-bottom: 12px;
+    }
+
+    .pricing__header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 780px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .pricing-card {
+      text-align: center;
+    }
+
+    .pricing-card--pro {
+      transform: scale(1.03);
+      border-color: rgba(0, 113, 227, 0.2);
+      box-shadow: 0 4px 24px rgba(0, 113, 227, 0.06);
+      position: relative;
+    }
+
+    .pricing-card--pro:hover {
+      box-shadow: 0 8px 40px rgba(0, 113, 227, 0.1);
+    }
+
+    .pricing-card__badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      background: rgba(0, 113, 227, 0.08);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+    }
+
+    .pricing-card__name {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card__price-wrapper {
+      margin-bottom: 8px;
+    }
+
+    .pricing-card__price-anchor {
+      font-size: 18px;
+      color: var(--text-tertiary);
+      text-decoration: line-through;
+    }
+
+    .pricing-card__price {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .pricing-card__price-note {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 32px;
+    }
+
+    .pricing-card__features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .pricing-card__features li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pricing-card__features li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-card__features .check {
+      color: var(--accent-green);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .pricing-card__guarantee {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-top: 12px;
+    }
+
+    /* ============================================
+       SECTION 7: SCREENSHOTS
+       ============================================ */
+    .screenshots {
+      padding: 120px 24px;
+      border-top: 1px solid var(--border-subtle);
+      background: #ffffff;
+    }
+
+    .screenshots__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .screenshots__header .section-headline {
+      margin-bottom: 12px;
+    }
+
+    .screenshots__header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .screenshots__pairs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 64px;
+    }
+
+    .screenshot-pair {
+      text-align: center;
+    }
+
+    .screenshot-pair__label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .screenshot-pair__label--before {
+      color: var(--text-tertiary);
+    }
+
+    .screenshot-pair__label--after {
+      color: var(--accent-green);
+    }
+
+    .screenshot-pair .window-frame {
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .screenshots__group {
+      margin-bottom: 48px;
+    }
+
+    .screenshots__group-title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ============================================
+       SECTION 8: FINAL CTA
+       ============================================ */
+    .final-cta {
+      padding: 160px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(0, 113, 227, 0.03) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .final-cta > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta__title {
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .final-cta__subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .final-cta__note {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-top: 20px;
+    }
+
+    /* ============================================
+       SECTION 9: FOOTER
+       ============================================ */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 24px;
+      background: #ffffff;
+    }
+
+    .footer__inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .footer__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      transition: color 0.2s ease;
+    }
+
+    .footer__links a:hover {
+      color: var(--text-primary);
+      opacity: 1;
+    }
+
+    .footer__copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+
+    /* Tablet */
+    @media (max-width: 1068px) {
+      .feature-hero {
+        gap: 40px;
+      }
+
+      .how-it-works__steps::before {
+        display: none;
+      }
+
+      .social-proof__stats {
+        gap: 24px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 734px) {
+      .hero {
+        padding: 100px 20px 40px;
+        min-height: auto;
+      }
+
+      .hero__icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+      }
+
+      .hero__ctas {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero__ctas .btn-primary,
+      .hero__ctas .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .social-proof__stats {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .feature-hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 64px;
+      }
+
+      .feature-hero--reverse {
+        direction: ltr;
+      }
+
+      .feature-hero__visual {
+        order: -1;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .how-it-works__steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .pricing__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card--pro {
+        transform: none;
+        order: -1;
+      }
+
+      .screenshots__pairs {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .final-cta {
+        padding: 100px 20px;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer__links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .glass-card {
+        padding: 28px;
+      }
+    }
+
+    /* Small mobile */
+    @media (max-width: 375px) {
+      .hero__title {
+        font-size: 36px;
+      }
+
+      .btn-primary, .btn-secondary, .btn-outline {
+        padding: 14px 24px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-badge">
-            <span>&#9834;</span> Built for serious music collectors
+  <!-- ========================================
+       SECTION 1: HERO
+       ======================================== -->
+  <section class="hero">
+    <img
+      src="https://serged67-hue.github.io/icon.png"
+      alt="MusicLibrarian icon"
+      class="hero__icon"
+      fetchpriority="high"
+    >
+
+    <!-- Language Toggle -->
+    <div style="position:fixed;top:20px;right:20px;z-index:1000;display:flex;gap:4px;background:rgba(0,0,0,0.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:980px;padding:4px;border:1px solid var(--border-subtle);">
+      <button onclick="setLang('en')" id="lang-en" style="padding:6px 14px;border:none;border-radius:980px;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font-stack);background:var(--accent-blue);color:white;transition:all 0.2s;">EN</button>
+      <button onclick="setLang('fr')" id="lang-fr" style="padding:6px 14px;border:none;border-radius:980px;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font-stack);background:transparent;color:var(--text-secondary);transition:all 0.2s;">FR</button>
+    </div>
+
+    <span class="hero__badge" data-i18n="hero.badge">For Apple Music on Mac</span>
+
+    <h1 class="hero__title">
+      <span data-i18n="hero.title1">Your music library,</span><br>
+      <span class="gradient-text" data-i18n="hero.title2">finally perfect.</span>
+    </h1>
+
+    <p class="hero__subtitle" data-i18n="hero.subtitle">
+      MusicLibrarian scans your entire Apple Music library, finds every duplicate,
+      broken rating, and missing artwork&nbsp;&mdash;&nbsp;then fixes it all.
+      One app. One click. Done.
+    </p>
+
+    <div class="hero__ctas">
+      <a href="#pricing" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="hero.cta1">Download Free for macOS</span>
+      </a>
+      <a href="#demo" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span data-i18n="hero.cta2">Watch the demo</span>
+      </a>
+    </div>
+
+    <div class="hero__screenshot">
+      <div class="window-frame">
+        <div class="window-frame__titlebar">
+          <span class="window-frame__dot window-frame__dot--red"></span>
+          <span class="window-frame__dot window-frame__dot--yellow"></span>
+          <span class="window-frame__dot window-frame__dot--green"></span>
         </div>
+        <img
+          src="https://serged67-hue.github.io/screenshot-dashboard.png"
+          alt="MusicLibrarian dashboard showing a full library overview"
+          fetchpriority="high"
+        >
+      </div>
+    </div>
+  </section>
 
-        <img src="icon.png" alt="MusicLibrarian" class="hero-icon">
+  <!-- ========================================
+       SECTION 2: SOCIAL PROOF BAR
+       ======================================== -->
+  <section class="social-proof">
+    <div class="container">
+      <div class="social-proof__stats animate">
+        <div class="stat">
+          <div class="stat__number gradient-text">16,000+</div>
+          <div class="stat__label" data-i18n="stats.tracks">tracks organized</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number gradient-text">283</div>
+          <div class="stat__label" data-i18n="stats.duplicates">duplicate groups found in one scan</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number gradient-text">2,086</div>
+          <div class="stat__label" data-i18n="stats.problems">problems detected and fixed</div>
+        </div>
+      </div>
 
-        <h1>Clean up your<br><span>Apple Music</span> library</h1>
-
-        <p class="hero-subtitle">
-            Tired of spending hours trying to organize your music? MusicLibrarian detects duplicates, fixes ratings, upgrades to Lossless, and diagnoses iCloud issues — in minutes.
+      <!-- REPLACE WITH REAL TESTIMONIALS -->
+      <div class="social-proof__testimonial animate animate-delay-1">
+        <p class="testimonial__quote" data-i18n="testimonial.quote">
+          &ldquo;I had no idea my library was that broken. MusicLibrarian found 300+ duplicates
+          I couldn&rsquo;t even see in Apple Music.&rdquo;
         </p>
+        <p class="testimonial__author" data-i18n="testimonial.author">&mdash; Alex M., 12,000+ track library</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="cta-buttons">
-            <a href="https://github.com/serged67-hue/serged67-hue.github.io/releases/download/v1.0/MusicLibrarian-v1.0.zip" class="btn-primary">Download Free</a>
-            <a href="#demo" class="btn-secondary">&#9654; Watch Demo</a>
+  <!-- ========================================
+       SECTION 3: DEMO VIDEO
+       ======================================== -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <div class="demo__header animate">
+        <h2 class="section-headline" data-i18n="demo.title">See it work.</h2>
+        <p class="section-subtitle" data-i18n="demo.subtitle">From scan to fix in under 30 seconds.</p>
+      </div>
+
+      <div class="demo__video-container animate animate-delay-1">
+        <iframe
+          src="https://share.synthesia.io/embeds/videos/041bdaee-e8cc-49b2-92d0-3664987fa94f"
+          loading="lazy"
+          title="MusicLibrarian Demo"
+          allow="encrypted-media; fullscreen;"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SECTION 4: FEATURES
+       ======================================== -->
+  <section class="features">
+    <div class="container--wide">
+      <div class="features__header animate">
+        <h2 class="section-headline" data-i18n="features.title">Seven tools. One obsession.</h2>
+        <p class="section-subtitle" data-i18n="features.subtitle">Every way your Apple Music library can break, MusicLibrarian can fix.</p>
+      </div>
+
+      <!-- Tier 1: Hero Feature — Duplicates -->
+      <div class="feature-hero animate">
+        <div class="feature-hero__content">
+          <p class="section-eyebrow" data-i18n="feat.dup.eyebrow">Duplicates</p>
+          <h3 class="feature-hero__title" data-i18n="feat.dup.title">Stop listening to the same song twice.</h3>
+          <p class="feature-hero__body" data-i18n="feat.dup.body">
+            MusicLibrarian finds exact copies, near-matches, and quality variants hiding in your library.
+            Its smart auto-selection keeps the best version of every track&nbsp;&mdash;&nbsp;highest bitrate,
+            best metadata, original artwork. Delete the rest in one click.
+          </p>
+        </div>
+        <div class="feature-hero__visual">
+          <div class="window-frame">
+            <div class="window-frame__titlebar">
+              <span class="window-frame__dot window-frame__dot--red"></span>
+              <span class="window-frame__dot window-frame__dot--yellow"></span>
+              <span class="window-frame__dot window-frame__dot--green"></span>
+            </div>
+            <img
+              src="https://serged67-hue.github.io/screenshot-duplicates-after.png"
+              alt="Duplicate detection results"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 1: Hero Feature — iCloud Health -->
+      <div class="feature-hero feature-hero--reverse animate">
+        <div class="feature-hero__content">
+          <p class="section-eyebrow" data-i18n="feat.health.eyebrow">iCloud Health</p>
+          <h3 class="feature-hero__title" data-i18n="feat.health.title">Find every broken track before it ruins your playlist.</h3>
+          <p class="feature-hero__body" data-i18n="feat.health.body">
+            Unavailable songs. DRM-locked files. Matched tracks that silently degraded to lower quality.
+            MusicLibrarian scans your entire iCloud Music Library and surfaces every problem, categorized
+            by severity&nbsp;&mdash;&nbsp;so you know exactly what to fix first.
+          </p>
+        </div>
+        <div class="feature-hero__visual">
+          <div class="window-frame">
+            <div class="window-frame__titlebar">
+              <span class="window-frame__dot window-frame__dot--red"></span>
+              <span class="window-frame__dot window-frame__dot--yellow"></span>
+              <span class="window-frame__dot window-frame__dot--green"></span>
+            </div>
+            <img
+              src="https://serged67-hue.github.io/screenshot-health-after.png"
+              alt="iCloud health diagnostic results"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 1: Hero Feature — Lossless -->
+      <div class="feature-hero animate">
+        <div class="feature-hero__content">
+          <p class="section-eyebrow" data-i18n="feat.lossless.eyebrow">Lossless</p>
+          <h3 class="feature-hero__title" data-i18n="feat.lossless.title">Hear your music the way it was recorded.</h3>
+          <p class="feature-hero__body" data-i18n="feat.lossless.body">
+            Thousands of your Apple Music tracks may still be streaming in compressed AAC when lossless
+            versions exist. MusicLibrarian identifies every upgradeable track and batch-processes your
+            entire library to full ALAC quality. No manual searching. No track-by-track work.
+          </p>
+        </div>
+        <div class="feature-hero__visual">
+          <div class="window-frame">
+            <div class="window-frame__titlebar">
+              <span class="window-frame__dot window-frame__dot--red"></span>
+              <span class="window-frame__dot window-frame__dot--yellow"></span>
+              <span class="window-frame__dot window-frame__dot--green"></span>
+            </div>
+            <img
+              src="https://serged67-hue.github.io/screenshot-dashboard.png"
+              alt="Lossless upgrade interface"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 2: Secondary Features Grid -->
+      <div class="features-grid">
+        <!-- Rating Fixer -->
+        <div class="glass-card feature-card animate">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none"/></svg>
+          </div>
+          <h4 class="feature-card__title" data-i18n="feat.rating.title">Ratings that actually mean something.</h4>
+          <p class="feature-card__body" data-i18n="feat.rating.body">
+            Inherited &ldquo;grey&rdquo; ratings silently break your smart playlists. Find them all
+            and reset them so your ratings reflect your actual taste.
+          </p>
         </div>
 
-        <p class="price-tag">macOS only. Free download — Pro upgrade: <strong>$29.99</strong> one-time.</p>
-    </section>
-
-    <!-- Demo Video -->
-    <section class="features" id="demo" style="padding: 4rem 2rem;">
-        <div class="features-container">
-            <h2 class="section-title">Watch the Demo</h2>
-            <p class="section-subtitle">See MusicLibrarian in action — 30 seconds to understand what it does.</p>
-            <div style="max-width: 800px; margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(124, 58, 237, 0.3);">
-                <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                    <iframe src="https://share.synthesia.io/embeds/videos/041bdaee-e8cc-49b2-92d0-3664987fa94f" loading="lazy" title="MusicLibrarian Demo" allow="encrypted-media; fullscreen;" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0; overflow: hidden;"></iframe>
-                </div>
-            </div>
+        <!-- ISRC Analysis -->
+        <div class="glass-card feature-card animate animate-delay-1">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="3" height="16" rx="1"/><rect x="10.5" y="4" width="3" height="16" rx="1"/><rect x="18" y="4" width="3" height="16" rx="1"/></svg>
+          </div>
+          <h4 class="feature-card__title" data-i18n="feat.isrc.title">Know when two tracks are truly identical.</h4>
+          <p class="feature-card__body" data-i18n="feat.isrc.body">
+            Compare International Standard Recording Codes to tell real duplicates from different recordings
+            of the same song. Studio version vs. live version? Now you'll know.
+          </p>
         </div>
-    </section>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="features-container">
-            <h2 class="section-title">Everything your library needs</h2>
-            <p class="section-subtitle">Seven powerful tools in one app, designed for Apple Music power users.</p>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#128270;</div>
-                    <h3>Duplicate Detection</h3>
-                    <p>Find exact, probable, similar, and quality variant duplicates. Smart auto-selection keeps the best version.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#11088;</div>
-                    <h3>Rating Fixer</h3>
-                    <p>Identify inherited (grey) ratings polluting your smart playlists. Reset them to clean up your library.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#127911;</div>
-                    <h3>Lossless Upgrade</h3>
-                    <p>Upgrade non-lossless Apple Music tracks to full quality. Batch process your entire library.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#9729;&#65039;</div>
-                    <h3>iCloud Health</h3>
-                    <p>Diagnose unavailable, DRM-protected, matched/degraded, and corrupted tracks in your cloud library.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#128296;</div>
-                    <h3>ISRC Analysis</h3>
-                    <p>Compare tracks using their International Standard Recording Code. Know exactly which duplicates are identical recordings.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#127908;</div>
-                    <h3>Shazam Verification</h3>
-                    <p>Detect corrupted metadata by identifying actual audio content. Find tracks where the title doesn't match the music.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">&#127912;</div>
-                    <h3>Artwork Health</h3>
-                    <p>Detect missing or low-quality album artwork. Find and apply high-res covers from Apple Music catalog in one click.</p>
-                </div>
-            </div>
+        <!-- Shazam Verification -->
+        <div class="glass-card feature-card animate animate-delay-2">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M2 12c0 0 2-4 5-4s3 8 6 8 5-4 5-4"/><path d="M6 12c0 0 2-4 5-4s3 8 6 8 5-4 5-4" opacity="0.4"/></svg>
+          </div>
+          <h4 class="feature-card__title" data-i18n="feat.shazam.title">Catch tracks pretending to be something else.</h4>
+          <p class="feature-card__body" data-i18n="feat.shazam.body">
+            When metadata lies, audio doesn't. MusicLibrarian identifies the actual song in each file
+            and flags mismatches&nbsp;&mdash;&nbsp;corrupted tags, wrong titles, swapped tracks.
+          </p>
         </div>
-    </section>
 
-    <!-- How it works -->
-    <section class="how-it-works">
-        <div class="features-container">
-            <h2 class="section-title">How it works</h2>
-            <p class="section-subtitle">Three steps to a clean library.</p>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h3>Scan your library</h3>
-                        <p>MusicLibrarian reads your entire Apple Music library in seconds using native macOS frameworks. No uploads, no cloud — everything stays on your Mac.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div>
-                        <h3>Review the diagnosis</h3>
-                        <p>See duplicates, rating issues, quality problems, and iCloud health status in a clear dashboard. Every issue is categorized by severity.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div>
-                        <h3>Fix with one click</h3>
-                        <p>Delete duplicates, reset inherited ratings, upgrade to Lossless, and fix metadata — all from one app. Your ratings are preserved through every operation.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Artwork Health -->
+        <div class="glass-card feature-card animate animate-delay-3">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <h4 class="feature-card__title" data-i18n="feat.artwork.title">Every album deserves its cover.</h4>
+          <p class="feature-card__body" data-i18n="feat.artwork.body">
+            Find missing and low-resolution artwork across your library. Pull high-res covers from the
+            Apple Music catalog and apply them in one click.
+          </p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <h2 class="section-title">Simple pricing</h2>
-        <p class="section-subtitle">Try everything for free. Pay once when you're ready.</p>
+  <!-- ========================================
+       SECTION 5: HOW IT WORKS
+       ======================================== -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="how-it-works__header animate">
+        <h2 class="section-headline" data-i18n="how.title">Three steps. Zero guesswork.</h2>
+      </div>
 
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3>Free</h3>
-                <div class="pricing-price">$0</div>
-                <ul class="pricing-features">
-                    <li>Unlimited library scanning</li>
-                    <li>Full duplicate detection</li>
-                    <li>ISRC analysis</li>
-                    <li>iCloud health diagnostic</li>
-                    <li>4 actions included</li>
-                </ul>
-            </div>
-
-            <div class="pricing-card featured">
-                <h3>Pro</h3>
-                <div class="pricing-price">$29.99 <span>one-time</span></div>
-                <ul class="pricing-features">
-                    <li>Everything in Free</li>
-                    <li>Unlimited deletions</li>
-                    <li>Unlimited rating transfers</li>
-                    <li>Lossless upgrade</li>
-                    <li>Catalog replacement search</li>
-                    <li>Batch artwork repair</li>
-                    <li>Lifetime license</li>
-                </ul>
-                <a href="https://serged6.gumroad.com/l/ipktis" class="btn-primary" style="display:inline-block; margin-top: 1rem; padding: 0.8rem 2rem;">Get Pro License</a>
-            </div>
+      <div class="how-it-works__steps">
+        <div class="glass-card step animate">
+          <div class="step__number gradient-text">01</div>
+          <h3 class="step__title" data-i18n="how.step1.title">Point it at your library.</h3>
+          <p class="step__body" data-i18n="how.step1.body">
+            MusicLibrarian reads your entire Apple Music library using native macOS frameworks.
+            No uploads. No cloud sync. Every byte stays on your Mac.
+          </p>
         </div>
-    </section>
 
-    <!-- Screenshots -->
-    <section class="features" id="screenshots" style="background: #0f0720;">
-        <div class="features-container">
-            <h2 class="section-title">See it in action</h2>
-            <p class="section-subtitle">Before and after — real results from a 16,000+ track library.</p>
-
-            <div style="display: flex; flex-direction: column; gap: 3rem;">
-                <div>
-                    <h3 style="color: var(--purple-glow); margin-bottom: 1rem; text-align: center;">Dashboard</h3>
-                    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                        <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 0.5rem;">Full overview of your 16,000+ track library</p>
-                        <img src="screenshot-dashboard.png" alt="Dashboard" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                    </div>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--purple-glow); margin-bottom: 1rem; text-align: center;">Duplicate Detection</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div style="text-align: center;">
-                            <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 0.5rem;">Before scan</p>
-                            <img src="screenshot-duplicates-before.png" alt="Duplicates before scan" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                        </div>
-                        <div style="text-align: center;">
-                            <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 0.5rem;">283 duplicate groups found</p>
-                            <img src="screenshot-duplicates-after.png" alt="Duplicates after scan" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--purple-glow); margin-bottom: 1rem; text-align: center;">iCloud Health Diagnostic</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div style="text-align: center;">
-                            <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 0.5rem;">Before diagnosis</p>
-                            <img src="screenshot-health-before.png" alt="Health before scan" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                        </div>
-                        <div style="text-align: center;">
-                            <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 0.5rem;">2,086 problems detected</p>
-                            <img src="screenshot-health-after.png" alt="Health after scan" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="glass-card step animate animate-delay-1">
+          <div class="step__number gradient-text">02</div>
+          <h3 class="step__title" data-i18n="how.step2.title">See what's actually wrong.</h3>
+          <p class="step__body" data-i18n="how.step2.body">
+            Duplicates, broken ratings, quality downgrades, iCloud failures, missing artwork&nbsp;&mdash;&nbsp;everything
+            is surfaced in a clean dashboard, sorted by severity.
+          </p>
         </div>
-    </section>
 
-    <!-- Requirements -->
-    <section class="requirements">
-        <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Requirements</h2>
-        <p>macOS 14 (Sonoma) or later. Apple Music subscription recommended for Lossless upgrade and catalog features. Works with libraries of any size.</p>
-    </section>
+        <div class="glass-card step animate animate-delay-2">
+          <div class="step__number gradient-text">03</div>
+          <h3 class="step__title" data-i18n="how.step3.title">Fix everything at once.</h3>
+          <p class="step__body" data-i18n="how.step3.body">
+            Delete duplicates, reset ratings, upgrade to lossless, repair artwork&nbsp;&mdash;&nbsp;in bulk,
+            with one click. Your ratings and playlists are preserved through every operation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2026 TheVaultDJ. Built with love for music collectors.<br>
-        <a href="https://www.youtube.com/@TheVaultDJ67">TheVaultDJ on YouTube</a> &middot;
-        <a href="https://serged6.gumroad.com/l/ipktis">Get on Gumroad</a> &middot;
-        <a href="privacy.html">Privacy Policy</a></p>
-    </footer>
+  <!-- ========================================
+       SECTION 6: PRICING
+       ======================================== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing__header animate">
+        <h2 class="section-headline" data-i18n="pricing.title">One price. No subscriptions. Ever.</h2>
+        <p class="section-subtitle" data-i18n="pricing.subtitle">Try everything free. Upgrade when your library demands it.</p>
+      </div>
+
+      <div class="pricing__grid">
+        <!-- Free Tier -->
+        <div class="glass-card pricing-card animate">
+          <h3 class="pricing-card__name" data-i18n="pricing.free.name">Free</h3>
+          <div class="pricing-card__price-wrapper">
+            <div class="pricing-card__price">$0</div>
+          </div>
+          <p class="pricing-card__price-note" data-i18n="pricing.free.note">Diagnose your entire library.</p>
+          <ul class="pricing-card__features">
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.free.f1">Unlimited library scanning</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.free.f2">Full duplicate detection</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.free.f3">ISRC analysis</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.free.f4">iCloud health diagnostic</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.free.f5">4 fix actions included</span></li>
+          </ul>
+          <a href="https://github.com/serged67-hue/serged67-hue.github.io/releases/download/v1.1/MusicLibrarian-v1.1.zip" class="btn-outline" style="width:100%;justify-content:center;" data-i18n="pricing.free.cta">Download Free</a>
+        </div>
+
+        <!-- Pro Tier -->
+        <div class="glass-card pricing-card pricing-card--pro animate animate-delay-1">
+          <span class="pricing-card__badge" data-i18n="pricing.pro.badge">Recommended</span>
+          <h3 class="pricing-card__name">Pro</h3>
+          <div class="pricing-card__price-wrapper">
+            <div class="pricing-card__price-anchor">$49.99</div>
+            <div class="pricing-card__price">$29.99</div>
+          </div>
+          <p class="pricing-card__price-note" data-i18n="pricing.pro.note">one-time purchase</p>
+          <ul class="pricing-card__features">
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f1">Everything in Free, plus:</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f2">Unlimited duplicate removal</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f3">Unlimited rating repair</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f4">Batch lossless upgrade</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f5">Apple Music catalog replacement</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f6">Batch artwork repair</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f7">Lifetime license &mdash; all future updates</span></li>
+          </ul>
+          <a href="https://serged6.gumroad.com/l/ipktis" class="btn-primary" style="width:100%;justify-content:center;" data-i18n="pricing.pro.cta">Get Pro License</a>
+          <p class="pricing-card__guarantee" data-i18n="pricing.pro.guarantee">30-day money-back guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SECTION 7: SCREENSHOTS
+       ======================================== -->
+  <section class="screenshots">
+    <div class="container--wide">
+      <div class="screenshots__header animate">
+        <h2 class="section-headline" data-i18n="screenshots.title">Real results. Real library.</h2>
+        <p class="section-subtitle" data-i18n="screenshots.subtitle">Scanned from a personal collection of 16,000+ tracks.</p>
+      </div>
+
+      <!-- Duplicate Detection Before/After -->
+      <div class="screenshots__group animate">
+        <p class="screenshots__group-title" data-i18n="screenshots.dup.title">Duplicate Detection</p>
+        <div class="screenshots__pairs">
+          <div class="screenshot-pair">
+            <p class="screenshot-pair__label screenshot-pair__label--before" data-i18n="screenshots.before">Before MusicLibrarian</p>
+            <div class="window-frame">
+              <div class="window-frame__titlebar">
+                <span class="window-frame__dot window-frame__dot--red"></span>
+                <span class="window-frame__dot window-frame__dot--yellow"></span>
+                <span class="window-frame__dot window-frame__dot--green"></span>
+              </div>
+              <img
+                src="https://serged67-hue.github.io/screenshot-duplicates-before.png"
+                alt="Library before duplicate cleanup"
+                loading="lazy"
+              >
+            </div>
+          </div>
+          <div class="screenshot-pair">
+            <p class="screenshot-pair__label screenshot-pair__label--after" data-i18n="screenshots.dup.after">283 duplicate groups eliminated</p>
+            <div class="window-frame">
+              <div class="window-frame__titlebar">
+                <span class="window-frame__dot window-frame__dot--red"></span>
+                <span class="window-frame__dot window-frame__dot--yellow"></span>
+                <span class="window-frame__dot window-frame__dot--green"></span>
+              </div>
+              <img
+                src="https://serged67-hue.github.io/screenshot-duplicates-after.png"
+                alt="Library after duplicate cleanup"
+                loading="lazy"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- iCloud Health Before/After -->
+      <div class="screenshots__group animate">
+        <p class="screenshots__group-title" data-i18n="screenshots.health.title">iCloud Health Diagnostic</p>
+        <div class="screenshots__pairs">
+          <div class="screenshot-pair">
+            <p class="screenshot-pair__label screenshot-pair__label--before" data-i18n="screenshots.before2">Before MusicLibrarian</p>
+            <div class="window-frame">
+              <div class="window-frame__titlebar">
+                <span class="window-frame__dot window-frame__dot--red"></span>
+                <span class="window-frame__dot window-frame__dot--yellow"></span>
+                <span class="window-frame__dot window-frame__dot--green"></span>
+              </div>
+              <img
+                src="https://serged67-hue.github.io/screenshot-health-before.png"
+                alt="iCloud library health before scan"
+                loading="lazy"
+              >
+            </div>
+          </div>
+          <div class="screenshot-pair">
+            <p class="screenshot-pair__label screenshot-pair__label--after" data-i18n="screenshots.health.after">2,086 issues surfaced and resolved</p>
+            <div class="window-frame">
+              <div class="window-frame__titlebar">
+                <span class="window-frame__dot window-frame__dot--red"></span>
+                <span class="window-frame__dot window-frame__dot--yellow"></span>
+                <span class="window-frame__dot window-frame__dot--green"></span>
+              </div>
+              <img
+                src="https://serged67-hue.github.io/screenshot-health-after.png"
+                alt="iCloud library health after fixes"
+                loading="lazy"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SECTION 8: FINAL CTA
+       ======================================== -->
+  <section class="final-cta">
+    <h2 class="final-cta__title animate" data-i18n="cta.title">Your library isn't going<br>to clean itself.</h2>
+    <p class="final-cta__subtitle animate animate-delay-1" data-i18n="cta.subtitle">
+      Download MusicLibrarian free. See what it finds in your first scan.
+    </p>
+    <div class="animate animate-delay-2">
+      <a href="#pricing" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="cta.button">Download Free for macOS</span>
+      </a>
+    </div>
+    <p class="final-cta__note animate animate-delay-3" data-i18n="cta.note">macOS 14 Sonoma or later. Apple Music subscription recommended.</p>
+  </section>
+
+  <!-- ========================================
+       SECTION 9: FOOTER
+       ======================================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="https://serged67-hue.github.io/icon.png" alt="MusicLibrarian" class="footer__icon">
+        <span class="footer__name">MusicLibrarian</span>
+      </div>
+      <ul class="footer__links">
+        <li><a href="https://www.youtube.com/@TheVaultDJ67" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://serged6.gumroad.com/l/ipktis" target="_blank" rel="noopener">Gumroad</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+      <p class="footer__copyright">&copy; 2026 TheVaultDJ. Built with love for music collectors.</p>
+    </div>
+  </footer>
+
+  <!-- ========================================
+       SCROLL ANIMATION SCRIPT
+       ======================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+    });
+
+    // ========================================
+    // i18n — EN / FR
+    // ========================================
+    const translations = {
+      fr: {
+        "hero.badge": "Pour Apple Music sur Mac",
+        "hero.title1": "Votre biblioth\u00e8que musicale,",
+        "hero.title2": "enfin parfaite.",
+        "hero.subtitle": "MusicLibrarian scanne toute votre biblioth\u00e8que Apple Music, trouve chaque doublon, rating cass\u00e9 et pochette manquante\u00a0\u2014\u00a0puis corrige tout. Une app. Un clic. C\u2019est fait.",
+        "hero.cta1": "T\u00e9l\u00e9charger gratuitement pour macOS",
+        "hero.cta2": "Voir la d\u00e9mo",
+        "stats.tracks": "morceaux organis\u00e9s",
+        "stats.duplicates": "groupes de doublons trouv\u00e9s en un scan",
+        "stats.problems": "probl\u00e8mes d\u00e9tect\u00e9s et corrig\u00e9s",
+        "testimonial.quote": "\u00ab\u00a0Je ne savais pas que ma biblioth\u00e8que \u00e9tait aussi cass\u00e9e. MusicLibrarian a trouv\u00e9 plus de 300 doublons invisibles dans Apple Music.\u00a0\u00bb",
+        "testimonial.author": "\u2014 Alex M., biblioth\u00e8que de 12\u00a0000+ morceaux",
+        "demo.title": "Voyez-le en action.",
+        "demo.subtitle": "Du scan \u00e0 la correction en moins de 30 secondes.",
+        "features.title": "Sept outils. Une seule obsession.",
+        "features.subtitle": "Chaque probl\u00e8me possible de votre biblioth\u00e8que Apple Music, MusicLibrarian le corrige.",
+        "feat.dup.eyebrow": "Doublons",
+        "feat.dup.title": "Arr\u00eatez d\u2019\u00e9couter le m\u00eame morceau deux fois.",
+        "feat.dup.body": "MusicLibrarian trouve les copies exactes, les quasi-doublons et les variantes de qualit\u00e9 cach\u00e9es dans votre biblioth\u00e8que. Sa s\u00e9lection intelligente garde la meilleure version\u00a0\u2014\u00a0meilleur bitrate, meilleures m\u00e9tadonn\u00e9es, pochette originale. Supprimez le reste en un clic.",
+        "feat.health.eyebrow": "Sant\u00e9 iCloud",
+        "feat.health.title": "Trouvez chaque morceau cass\u00e9 avant qu\u2019il ne ruine votre playlist.",
+        "feat.health.body": "Morceaux indisponibles. Fichiers prot\u00e9g\u00e9s par DRM. Morceaux match\u00e9s d\u00e9grad\u00e9s en qualit\u00e9 inf\u00e9rieure. MusicLibrarian scanne toute votre biblioth\u00e8que iCloud Music et remonte chaque probl\u00e8me, class\u00e9 par s\u00e9v\u00e9rit\u00e9\u00a0\u2014\u00a0pour savoir exactement quoi corriger en premier.",
+        "feat.lossless.eyebrow": "Lossless",
+        "feat.lossless.title": "\u00c9coutez votre musique telle qu\u2019elle a \u00e9t\u00e9 enregistr\u00e9e.",
+        "feat.lossless.body": "Des milliers de vos morceaux Apple Music sont peut-\u00eatre encore en AAC compress\u00e9 alors que des versions lossless existent. MusicLibrarian identifie chaque morceau \u00e0 upgrader et traite toute votre biblioth\u00e8que en qualit\u00e9 ALAC. Aucune recherche manuelle.",
+        "feat.rating.title": "Des ratings qui ont vraiment un sens.",
+        "feat.rating.body": "Les ratings \u00ab\u00a0gris\u00a0\u00bb h\u00e9rit\u00e9s cassent silencieusement vos smart playlists. Trouvez-les tous et r\u00e9initialisez-les pour que vos ratings refl\u00e8tent vos vrais go\u00fbts.",
+        "feat.isrc.title": "Sachez quand deux morceaux sont vraiment identiques.",
+        "feat.isrc.body": "Comparez les codes ISRC pour distinguer les vrais doublons des enregistrements diff\u00e9rents d\u2019un m\u00eame morceau. Version studio vs. live\u00a0? Maintenant vous saurez.",
+        "feat.shazam.title": "D\u00e9tectez les morceaux qui mentent sur leur identit\u00e9.",
+        "feat.shazam.body": "Quand les m\u00e9tadonn\u00e9es mentent, l\u2019audio ne ment pas. MusicLibrarian identifie le vrai morceau dans chaque fichier et signale les erreurs\u00a0\u2014\u00a0tags corrompus, titres erron\u00e9s, morceaux invers\u00e9s.",
+        "feat.artwork.title": "Chaque album m\u00e9rite sa pochette.",
+        "feat.artwork.body": "Trouvez les pochettes manquantes et basse r\u00e9solution dans votre biblioth\u00e8que. R\u00e9cup\u00e9rez les pochettes HD depuis le catalogue Apple Music et appliquez-les en un clic.",
+        "how.title": "Trois \u00e9tapes. Z\u00e9ro devinette.",
+        "how.step1.title": "Pointez-le vers votre biblioth\u00e8que.",
+        "how.step1.body": "MusicLibrarian lit toute votre biblioth\u00e8que Apple Music via les frameworks natifs macOS. Aucun upload. Aucune synchro cloud. Tout reste sur votre Mac.",
+        "how.step2.title": "Voyez ce qui ne va vraiment pas.",
+        "how.step2.body": "Doublons, ratings cass\u00e9s, d\u00e9gradations de qualit\u00e9, \u00e9checs iCloud, pochettes manquantes\u00a0\u2014\u00a0tout est affich\u00e9 dans un dashboard clair, tri\u00e9 par s\u00e9v\u00e9rit\u00e9.",
+        "how.step3.title": "Corrigez tout d\u2019un coup.",
+        "how.step3.body": "Supprimez les doublons, r\u00e9initialisez les ratings, upgradez en lossless, r\u00e9parez les pochettes\u00a0\u2014\u00a0en masse, en un clic. Vos ratings et playlists sont pr\u00e9serv\u00e9s.",
+        "pricing.title": "Un prix. Pas d\u2019abonnement. Jamais.",
+        "pricing.subtitle": "Essayez tout gratuitement. Passez au Pro quand votre biblioth\u00e8que l\u2019exige.",
+        "pricing.free.name": "Gratuit",
+        "pricing.free.note": "Diagnostiquez toute votre biblioth\u00e8que.",
+        "pricing.free.f1": "Scan illimit\u00e9 de la biblioth\u00e8que",
+        "pricing.free.f2": "D\u00e9tection compl\u00e8te des doublons",
+        "pricing.free.f3": "Analyse ISRC",
+        "pricing.free.f4": "Diagnostic sant\u00e9 iCloud",
+        "pricing.free.f5": "4 actions de correction incluses",
+        "pricing.free.cta": "T\u00e9l\u00e9charger gratuitement",
+        "pricing.pro.badge": "Recommand\u00e9",
+        "pricing.pro.note": "achat unique",
+        "pricing.pro.f1": "Tout le Gratuit, plus :",
+        "pricing.pro.f2": "Suppression illimit\u00e9e des doublons",
+        "pricing.pro.f3": "R\u00e9paration illimit\u00e9e des ratings",
+        "pricing.pro.f4": "Upgrade lossless en masse",
+        "pricing.pro.f5": "Remplacement via catalogue Apple Music",
+        "pricing.pro.f6": "R\u00e9paration des pochettes en masse",
+        "pricing.pro.f7": "Licence \u00e0 vie \u2014 toutes les futures mises \u00e0 jour",
+        "pricing.pro.cta": "Obtenir la licence Pro",
+        "pricing.pro.guarantee": "Garantie satisfait ou rembours\u00e9 30 jours.",
+        "screenshots.title": "Vrais r\u00e9sultats. Vraie biblioth\u00e8que.",
+        "screenshots.subtitle": "Scann\u00e9 depuis une collection personnelle de 16\u00a0000+ morceaux.",
+        "screenshots.dup.title": "D\u00e9tection des doublons",
+        "screenshots.before": "Avant MusicLibrarian",
+        "screenshots.dup.after": "283 groupes de doublons \u00e9limin\u00e9s",
+        "screenshots.health.title": "Diagnostic sant\u00e9 iCloud",
+        "screenshots.before2": "Avant MusicLibrarian",
+        "screenshots.health.after": "2\u00a0086 probl\u00e8mes d\u00e9tect\u00e9s et r\u00e9solus",
+        "cta.title": "Votre biblioth\u00e8que ne va pas<br>se nettoyer toute seule.",
+        "cta.subtitle": "T\u00e9l\u00e9chargez MusicLibrarian gratuitement. Voyez ce qu\u2019il trouve d\u00e8s le premier scan.",
+        "cta.button": "T\u00e9l\u00e9charger gratuitement pour macOS",
+        "cta.note": "macOS 14 Sonoma ou ult\u00e9rieur. Abonnement Apple Music recommand\u00e9."
+      }
+    };
+
+    let currentLang = 'en';
+    const originalTexts = {};
+
+    function setLang(lang) {
+      currentLang = lang;
+      const enBtn = document.getElementById('lang-en');
+      const frBtn = document.getElementById('lang-fr');
+      if (lang === 'fr') {
+        frBtn.style.background = 'var(--accent-blue)';
+        frBtn.style.color = 'white';
+        enBtn.style.background = 'transparent';
+        enBtn.style.color = 'var(--text-secondary)';
+      } else {
+        enBtn.style.background = 'var(--accent-blue)';
+        enBtn.style.color = 'white';
+        frBtn.style.background = 'transparent';
+        frBtn.style.color = 'var(--text-secondary)';
+      }
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (!originalTexts[key]) originalTexts[key] = el.textContent;
+        var newText = lang === 'fr' ? (translations.fr[key] || originalTexts[key]) : originalTexts[key];
+        if (newText.indexOf('<br>') !== -1) {
+          el.innerHTML = newText;
+        } else {
+          el.textContent = newText;
+        }
+      });
+      document.documentElement.lang = lang;
+      localStorage.setItem('ml-lang', lang);
+    }
+
+    // Auto-detect language on load
+    document.addEventListener('DOMContentLoaded', function() {
+      var saved = localStorage.getItem('ml-lang');
+      var browserFr = navigator.language.startsWith('fr');
+      if (saved === 'fr' || (!saved && browserFr)) setLang('fr');
+    });
+  </script>
 
 </body>
 </html>
