@@ -668,6 +668,86 @@
     }
 
     /* ============================================
+       SECTION: COMPARISON TABLE
+       ============================================ */
+    .comparison {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+    .comparison__header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .comparison__table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .comparison__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 700px;
+    }
+    .comparison__table thead th {
+      padding: 14px 16px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--text-primary);
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+      font-size: 14px;
+    }
+    .comparison__table thead th:first-child {
+      text-align: left;
+    }
+    .comparison__table thead th.highlight {
+      background: linear-gradient(135deg, #6f42c1, #e84393);
+      color: white;
+      border-radius: 12px 12px 0 0;
+      font-size: 15px;
+    }
+    .comparison__table tbody td {
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      color: var(--text-secondary);
+    }
+    .comparison__table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .comparison__table tbody td.highlight {
+      background: rgba(111, 66, 193, 0.04);
+    }
+    .comparison__table .yes {
+      color: #34c759;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .comparison__table .no {
+      color: #d1d1d6;
+      font-size: 18px;
+    }
+    .comparison__table .partial {
+      color: #ff9f0a;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .comparison__table tfoot td {
+      padding: 14px 16px;
+      text-align: center;
+      font-weight: 700;
+      border-top: 2px solid rgba(0,0,0,0.08);
+      color: var(--text-primary);
+    }
+    .comparison__table tfoot td:first-child {
+      text-align: left;
+    }
+    .comparison__table tfoot td.highlight {
+      background: rgba(111, 66, 193, 0.04);
+    }
+
+    /* ============================================
        SECTION 6: PRICING
        ============================================ */
     .pricing {
@@ -1387,6 +1467,91 @@
   </section>
 
   <!-- ========================================
+       SECTION: COMPARISON TABLE
+       ======================================== -->
+  <section class="comparison" id="compare">
+    <div class="container">
+      <div class="comparison__header animate">
+        <h2 class="section-headline" data-i18n="compare.title">How MusicLibrarian compares</h2>
+        <p class="section-subtitle" data-i18n="compare.subtitle">The only all-in-one solution for Apple Music on Mac.</p>
+      </div>
+      <div class="comparison__table-wrap animate">
+        <table class="comparison__table">
+          <thead>
+            <tr>
+              <th data-i18n="compare.feature">Feature</th>
+              <th>Tune Sweeper</th>
+              <th>Dupin</th>
+              <th>TunesMechanic</th>
+              <th class="highlight">MusicLibrarian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="compare.duplicates">Duplicate detection & removal</td>
+              <td><span class="yes">&#10003;</span></td>
+              <td><span class="yes">&#10003;</span></td>
+              <td><span class="yes">&#10003;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.icloud">iCloud health diagnostic</td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.artwork">Missing artwork repair</td>
+              <td><span class="yes">&#10003;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.lossless">Lossless upgrade</td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.ratings">Rating repair</td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="partial">Partial</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.isrc">ISRC analysis</td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="compare.shazam">Shazam verification</td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td><span class="no">&#10005;</span></td>
+              <td class="highlight"><span class="yes">&#10003;</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td data-i18n="compare.price">Price</td>
+              <td>$23</td>
+              <td>$15</td>
+              <td>$5</td>
+              <td class="highlight" data-i18n="compare.ourprice">Free / $29.99 Pro</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
        SECTION 6: PRICING
        ======================================== -->
   <section class="pricing" id="pricing">
@@ -1627,6 +1792,18 @@
         "how.step2.body": "Doublons, ratings cass\u00e9s, d\u00e9gradations de qualit\u00e9, \u00e9checs iCloud, pochettes manquantes\u00a0\u2014\u00a0tout est affich\u00e9 dans un dashboard clair, tri\u00e9 par s\u00e9v\u00e9rit\u00e9.",
         "how.step3.title": "Corrigez tout d\u2019un coup.",
         "how.step3.body": "Supprimez les doublons, r\u00e9initialisez les ratings, upgradez en lossless, r\u00e9parez les pochettes\u00a0\u2014\u00a0en masse, en un clic. Vos ratings et playlists sont pr\u00e9serv\u00e9s.",
+        "compare.title": "MusicLibrarian face \u00e0 la concurrence",
+        "compare.subtitle": "La seule solution tout-en-un pour Apple Music sur Mac.",
+        "compare.feature": "Fonctionnalit\u00e9",
+        "compare.duplicates": "D\u00e9tection et suppression des doublons",
+        "compare.icloud": "Diagnostic sant\u00e9 iCloud",
+        "compare.artwork": "R\u00e9paration des pochettes manquantes",
+        "compare.lossless": "Upgrade lossless",
+        "compare.ratings": "R\u00e9paration des notes",
+        "compare.isrc": "Analyse ISRC",
+        "compare.shazam": "V\u00e9rification Shazam",
+        "compare.price": "Prix",
+        "compare.ourprice": "Gratuit / 29,99$ Pro",
         "pricing.title": "Un prix. Pas d\u2019abonnement. Jamais.",
         "pricing.subtitle": "Essayez tout gratuitement. Passez au Pro quand votre biblioth\u00e8que l\u2019exige.",
         "pricing.free.name": "Gratuit",
