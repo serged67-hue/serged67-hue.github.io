@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://serged67-hue.github.io/sitemap.xml
