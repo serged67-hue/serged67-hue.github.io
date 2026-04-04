@@ -1665,7 +1665,7 @@
           <span class="pricing-card__badge" data-i18n="pricing.pro.badge">Recommended</span>
           <h3 class="pricing-card__name">Pro</h3>
           <div class="pricing-card__price-wrapper">
-            <div class="pricing-card__price">$29.99</div>
+            <div class="pricing-card__price"><s style="color:var(--text-tertiary);font-weight:400;font-size:0.6em;">$29.99</s> $17.99</div>
           </div>
           <p class="pricing-card__price-note" data-i18n="pricing.pro.note">one-time purchase</p>
           <p style="margin-top:8px;font-size:14px;font-weight:600;color:#34c759;" data-i18n="pricing.pro.easter">🐣 <strong>$17.99</strong> with code <code style="background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;font-size:13px;">EASTER2026</code> — <span id="easter-countdown"></span></p>
@@ -1961,7 +1961,7 @@
         "pricing.pro.f4": "Upgrade lossless en masse",
         "pricing.pro.f5": "Remplacement via catalogue Apple Music",
         "pricing.pro.f6": "R\u00e9paration des pochettes en masse",
-        "pricing.pro.f7": "Licence \u00e0 vie \u2014 toutes les futures mises \u00e0 jour",
+        "pricing.pro.f7": "Licence \u00e0 vie \u2014 <strong style='color:var(--accent-red);'>toutes les futures mises \u00e0 jour</strong>",
         "pricing.pro.cta": "Obtenir la licence Pro",
         "pricing.pro.guarantee": "Garantie satisfait ou rembours\u00e9 30 jours.",
         "screenshots.title": "Vrais r\u00e9sultats. Vraie biblioth\u00e8que.",
@@ -1999,9 +1999,9 @@
       }
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
-        if (!originalTexts[key]) originalTexts[key] = el.textContent;
+        if (!originalTexts[key]) originalTexts[key] = el.innerHTML;
         var newText = lang === 'fr' ? (translations.fr[key] || originalTexts[key]) : originalTexts[key];
-        if (newText.indexOf('<br>') !== -1) {
+        if (newText.indexOf('<') !== -1) {
           el.innerHTML = newText;
         } else {
           el.textContent = newText;
