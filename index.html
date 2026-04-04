@@ -1419,7 +1419,7 @@
         <div style="width:1px;height:24px;background:var(--border-subtle);"></div>
         <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--text-primary);">
           <span style="font-size:20px;">💎</span>
-          <span data-i18n="nudge.pro">Fix everything — $29.99 one-time</span>
+          <span data-i18n="nudge.pro">Fix everything — $17.99 with code EASTER2026</span>
         </div>
         <a href="#pricing" style="padding:10px 24px;background:var(--accent-blue);color:white;border-radius:980px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s;" data-i18n="nudge.cta">Get Pro →</a>
       </div>
@@ -1665,10 +1665,10 @@
           <span class="pricing-card__badge" data-i18n="pricing.pro.badge">Recommended</span>
           <h3 class="pricing-card__name">Pro</h3>
           <div class="pricing-card__price-wrapper">
-            <div class="pricing-card__price-anchor">$49.99</div>
             <div class="pricing-card__price">$29.99</div>
           </div>
           <p class="pricing-card__price-note" data-i18n="pricing.pro.note">one-time purchase</p>
+          <p style="margin-top:8px;font-size:14px;font-weight:600;color:#34c759;" data-i18n="pricing.pro.easter">🐣 <strong>$17.99</strong> with code <code style="background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;font-size:13px;">EASTER2026</code> — <span id="easter-countdown"></span></p>
           <ul class="pricing-card__features">
             <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f1">Everything in Free, plus:</span></li>
             <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f2">Unlimited duplicate removal</span></li>
@@ -1676,7 +1676,7 @@
             <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f4">Batch lossless upgrade</span></li>
             <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f5">Apple Music catalog replacement</span></li>
             <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f6">Batch artwork repair</span></li>
-            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f7">Lifetime license &mdash; all future updates</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="pricing.pro.f7">Lifetime license &mdash; <strong style="color:var(--accent-red);">all future updates</strong></span></li>
           </ul>
           <a href="https://serged6.gumroad.com/l/ipktis" class="btn-primary" style="width:100%;justify-content:center;" data-i18n="pricing.pro.cta">Get Pro License</a>
           <p class="pricing-card__guarantee" data-i18n="pricing.pro.guarantee">30-day money-back guarantee.</p>
@@ -1810,6 +1810,23 @@
   </footer>
 
   <!-- ========================================
+       EASTER COUNTDOWN
+       ======================================== -->
+  <script>
+    (function() {
+      var end = new Date('2026-04-21T23:59:59');
+      var now = new Date();
+      var days = Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24)));
+      var el = document.getElementById('easter-countdown');
+      var elFr = document.getElementById('easter-countdown-fr');
+      var enText = days <= 0 ? 'Offer expired' : days === 1 ? 'Last day!' : days + ' days left!';
+      var frText = days <= 0 ? 'Offre expirée' : days === 1 ? 'Dernier jour !' : 'Plus que ' + days + ' jours !';
+      if (el) el.textContent = enText;
+      if (elFr) elFr.textContent = frText;
+    })();
+  </script>
+
+  <!-- ========================================
        GOOGLE ADS CONVERSION TRACKING
        ======================================== -->
   <script>
@@ -1923,7 +1940,7 @@
         "compare.ourprice": "Gratuit / 29,99$ Pro",
         "pricing.socialproof": "Rejoignez 1 000+ utilisateurs Mac qui ont nettoy\u00e9 leur biblioth\u00e8que musicale",
         "nudge.free": "Scannez tout gratuitement",
-        "nudge.pro": "Corrigez tout \u2014 29,99\u00a0$ une seule fois",
+        "nudge.pro": "Corrigez tout \u2014 17,99\u00a0$ avec le code EASTER2026",
         "nudge.cta": "Obtenir Pro \u2192",
         "pricing.title": "Un prix. Pas d\u2019abonnement. Jamais.",
         "pricing.subtitle": "Essayez tout gratuitement. Passez au Pro quand votre biblioth\u00e8que l\u2019exige.",
@@ -1937,6 +1954,7 @@
         "pricing.free.cta": "T\u00e9l\u00e9charger gratuitement",
         "pricing.pro.badge": "Recommand\u00e9",
         "pricing.pro.note": "achat unique",
+        "pricing.pro.easter": "🐣 <strong>17,99\u00a0$</strong> avec le code <code style='background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;font-size:13px;'>EASTER2026</code> — <span id='easter-countdown-fr'></span>",
         "pricing.pro.f1": "Tout le Gratuit, plus :",
         "pricing.pro.f2": "Suppression illimit\u00e9e des doublons",
         "pricing.pro.f3": "R\u00e9paration illimit\u00e9e des ratings",
