@@ -1179,6 +1179,22 @@
   <!-- ========================================
        SECTION 1: HERO
        ======================================== -->
+  <!-- Non-macOS banner -->
+  <div id="non-mac-banner" style="display:none;background:linear-gradient(135deg,#1d1d1f,#2d2d30);color:white;text-align:center;padding:14px 20px;font-family:var(--font-stack);font-size:15px;font-weight:500;position:relative;z-index:999;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="vertical-align:-3px;margin-right:6px;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <span data-i18n="banner.nonmac">MusicLibrarian is a macOS app. Bookmark this page and come back from your Mac!</span>
+  </div>
+  <script>
+    (function(){
+      var ua = navigator.userAgent || navigator.platform || '';
+      var isMac = /Macintosh|MacIntel|MacPPC|Mac68K|Mac OS/i.test(ua);
+      if (!isMac) {
+        var b = document.getElementById('non-mac-banner');
+        if (b) b.style.display = 'block';
+      }
+    })();
+  </script>
+
   <section class="hero">
     <img
       src="https://serged67-hue.github.io/icon.png"
@@ -1193,7 +1209,7 @@
       <button onclick="setLang('fr')" id="lang-fr" style="padding:6px 14px;border:none;border-radius:980px;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font-stack);background:transparent;color:var(--text-secondary);transition:all 0.2s;">FR</button>
     </div>
 
-    <span class="hero__badge" data-i18n="hero.badge">For Apple Music on Mac</span>
+    <span class="hero__badge" data-i18n="hero.badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Requires macOS 13+ · Apple Music</span>
 
     <h1 class="hero__title">
       <span data-i18n="hero.title1">Your music library,</span><br>
@@ -1219,7 +1235,6 @@
     </div>
 
     <div style="margin-top: 20px;">
-      <a href="https://www.producthunt.com/products/musiclibrarian?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-musiclibrarian" target="_blank" rel="noopener noreferrer"><img alt="MusicLibrarian - Clean up your Apple Music library in minutes | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1114190&theme=light&t=1775216733028"></a>
     </div>
 
     <div class="hero__screenshot">
@@ -1790,7 +1805,7 @@
         <li><a href="https://serged6.gumroad.com/l/ipktis" target="_blank" rel="noopener">Gumroad</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
       </ul>
-      <p class="footer__copyright">&copy; 2026 TheVaultDJ. Built with love for music collectors.</p>
+      <p class="footer__copyright">&copy; 2026 <a href="https://thevaultdj.com" style="color:var(--text-tertiary);text-decoration:underline;">thevaultdj.com</a> — Built with love for music collectors.</p>
     </div>
   </footer>
 
@@ -1822,7 +1837,8 @@
         "banner.easter": "Promo de Pâques — 40% de réduction sur la licence Pro ! Utilisez le code",
         "banner.easter2": "lors du paiement. Valable jusqu'au 21 avril.",
         "banner.easter.cta": "En profiter →",
-        "hero.badge": "Pour Apple Music sur Mac",
+        "banner.nonmac": "MusicLibrarian est une app macOS. Ajoutez cette page en favori et revenez depuis votre Mac !",
+        "hero.badge": "Nécessite macOS 13+ · Apple Music",
         "hero.title1": "Votre biblioth\u00e8que musicale,",
         "hero.title2": "enfin parfaite.",
         "hero.subtitle": "Vos playlists intelligentes sont peut-\u00eatre cass\u00e9es en ce moment. Apple Music d\u00e9grade discr\u00e8tement vos morceaux en audio compress\u00e9 et propage des notes fant\u00f4mes dans votre biblioth\u00e8que. MusicLibrarian trouve et corrige tout\u00a0\u2014\u00a0doublons, ratings cass\u00e9s, lossless manquant\u00a0\u2014\u00a0en un clic.",
