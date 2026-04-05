@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicLibrarian — Quick Start Guide</title>
+  <link rel="icon" href="https://serged67-hue.github.io/icon.png">
+  <style>
+    :root {
+      --bg: #fbfbfd;
+      --text: #1d1d1f;
+      --text2: #6e6e73;
+      --accent: #0071e3;
+      --red: #fa2d48;
+      --orange: #ff9f0a;
+      --blue: #0071e3;
+      --green: #34c759;
+      --purple: #af52de;
+      --border: rgba(0,0,0,0.08);
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:var(--font); background:var(--bg); color:var(--text); font-size:17px; line-height:1.7; }
+    .container { max-width:800px; margin:0 auto; padding:60px 24px 80px; }
+    h1 { font-size:clamp(32px,5vw,48px); font-weight:700; letter-spacing:-0.02em; margin-bottom:8px; }
+    h1 span { background:linear-gradient(90deg,#e8375a,#6f42c1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .subtitle { font-size:19px; color:var(--text2); margin-bottom:48px; }
+    h2 { font-size:28px; font-weight:700; margin:48px 0 16px; padding-top:32px; border-top:1px solid var(--border); }
+    h2:first-of-type { border-top:none; padding-top:0; }
+    h3 { font-size:20px; font-weight:700; margin:32px 0 12px; }
+    p { margin-bottom:16px; }
+    .step { background:white; border:1px solid var(--border); border-radius:16px; padding:24px; margin:16px 0; }
+    .step-number { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; background:var(--accent); color:white; border-radius:50%; font-weight:700; font-size:15px; margin-right:10px; }
+    .step-title { font-weight:700; font-size:18px; }
+    .step p { margin:12px 0 0; color:var(--text2); font-size:15px; }
+    .badge { display:inline-block; padding:2px 10px; border-radius:6px; font-size:13px; font-weight:600; color:white; }
+    .badge--red { background:var(--red); }
+    .badge--orange { background:var(--orange); }
+    .badge--blue { background:var(--blue); }
+    .badge--green { background:var(--green); }
+    .badge--purple { background:var(--purple); }
+    .tip { background:#f0f7ff; border-left:4px solid var(--accent); padding:16px 20px; border-radius:0 12px 12px 0; margin:16px 0; font-size:15px; }
+    .warning { background:#fff5f5; border-left:4px solid var(--red); padding:16px 20px; border-radius:0 12px 12px 0; margin:16px 0; font-size:15px; }
+    .phase-label { display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text2); margin-bottom:8px; }
+    ul { margin:8px 0 16px 20px; }
+    li { margin:6px 0; font-size:15px; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .back-link { display:inline-block; margin-bottom:32px; font-size:15px; font-weight:600; }
+    .cta-box { text-align:center; margin:48px 0; padding:40px; background:linear-gradient(135deg,#f8f8ff,#fff0f5); border-radius:20px; }
+    .cta-box a { display:inline-block; padding:14px 32px; background:var(--accent); color:white; border-radius:980px; font-weight:600; font-size:16px; text-decoration:none; }
+    .order-list { counter-reset:order; list-style:none; margin-left:0; }
+    .order-list li { counter-increment:order; padding-left:40px; position:relative; margin:12px 0; }
+    .order-list li::before { content:counter(order); position:absolute; left:0; top:2px; width:28px; height:28px; background:var(--accent); color:white; border-radius:50%; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="https://thevaultdj.com" class="back-link">&larr; Back to thevaultdj.com</a>
+
+  <h1>MusicLibrarian <span>Quick Start Guide</span></h1>
+  <p class="subtitle">Follow these steps in order for the best results. Each phase builds on the previous one.</p>
+
+  <!-- ======== RECOMMENDED ORDER ======== -->
+  <h2>Recommended Order</h2>
+  <ol class="order-list">
+    <li><strong>Dashboard</strong> &mdash; See what's wrong at a glance</li>
+    <li><strong>Health Scan</strong> &mdash; Fix critical issues first (unavailable, DRM, degraded tracks)</li>
+    <li><strong>Duplicates</strong> &mdash; Remove duplicate tracks (after Health, so you don't waste time on broken tracks)</li>
+    <li><strong>Lossless Upgrade</strong> &mdash; Upgrade remaining AAC tracks to lossless</li>
+    <li><strong>Artwork Repair</strong> &mdash; Fix missing and low-quality album covers</li>
+    <li><strong>Metadata Fixer</strong> &mdash; Correct misspelled or garbled track info</li>
+    <li><strong>Inherited Ratings</strong> &mdash; Clean up phantom 5-star ratings</li>
+  </ol>
+
+  <div class="tip">Start with Health, then Duplicates. This avoids deleting a track that's already broken, or keeping a duplicate of a degraded file.</div>
+
+  <!-- ======== STEP 1: DASHBOARD ======== -->
+  <h2>Step 1 &mdash; Dashboard</h2>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Open MusicLibrarian</span>
+    <p>The app automatically scans your Apple Music library. The Dashboard shows your total tracks, ratings distribution, and a quick health overview. Take a moment to see the big picture before diving in.</p>
+  </div>
+
+  <!-- ======== STEP 2: HEALTH ======== -->
+  <h2>Step 2 &mdash; Health Scan</h2>
+  <p>This is the most important step. Health Scan finds tracks that are broken, degraded, or unavailable in your iCloud Music Library.</p>
+
+  <h3>Issue types (by severity)</h3>
+
+  <div class="step">
+    <span class="badge badge--red">CRITICAL</span>
+    <ul>
+      <li><strong>Unavailable</strong> &mdash; Track removed from Apple Music. Can't play anymore.</li>
+      <li><strong>DRM Protected</strong> &mdash; Old protected AAC files from the iTunes Store era.</li>
+      <li><strong>Wrong Metadata</strong> &mdash; Shazam detected a different song than what the tags say.</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <span class="badge badge--orange">WARNING</span>
+    <ul>
+      <li><strong>Matched Degraded</strong> &mdash; Apple matched your track to a 256kbps AAC version.</li>
+      <li><strong>Not Downloadable</strong> &mdash; Track lost download eligibility.</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <span class="badge badge--blue">INFO</span>
+    <ul>
+      <li><strong>Corrupted Metadata</strong> &mdash; Duration = 0 or suspiciously small file.</li>
+      <li><strong>Uploaded in Catalog</strong> &mdash; You uploaded a file that exists in Apple Music's catalog.</li>
+      <li><strong>Apple Music Not Lossless</strong> &mdash; Downloaded in AAC when lossless is available.</li>
+    </ul>
+  </div>
+
+  <h3>What to do</h3>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Click "Scan Health"</span>
+    <p>The scan runs through your entire library and calculates a health score (0-100). Filter by severity to focus on the worst issues first.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Click "Search Replacements"</span>
+    <p>MusicLibrarian searches the Apple Music catalog for replacement tracks. You'll see a progress bar with Found / Not Found counts.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span><span class="step-title">Click "Replace All Found"</span>
+    <p>For each fixable track: the app adds the catalog version, transfers your rating, and removes the broken track. This can take a while for large libraries &mdash; let it run.</p>
+  </div>
+
+  <div class="warning">Don't skip this step. If you go straight to Duplicates, you might keep a degraded track and delete the good one.</div>
+
+  <!-- ======== STEP 3: DUPLICATES ======== -->
+  <h2>Step 3 &mdash; Duplicates</h2>
+  <p>Now that your library is healthy, it's time to find and remove duplicate tracks.</p>
+
+  <h3>Duplicate categories</h3>
+  <div class="step">
+    <ul>
+      <li><span class="badge badge--red">Exact</span> &mdash; Identical metadata (title, artist, album, duration)</li>
+      <li><span class="badge badge--orange">Probable</span> &mdash; Very similar, minor differences</li>
+      <li><span class="badge" style="background:#e6c619;color:#1d1d1f;">Similar</span> &mdash; Close match, worth reviewing</li>
+      <li><span class="badge badge--blue">Quality Variant</span> &mdash; Same track, different bitrate/format</li>
+    </ul>
+  </div>
+
+  <h3>Phase 1 &mdash; Scan</h3>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Select source and click "Scan"</span>
+    <p>Choose "All Library" or a specific playlist. Optionally check "Local Only" to exclude streaming-only tracks. The scanner groups tracks by normalized title + artist.</p>
+  </div>
+
+  <h3>Phase 2 &mdash; Verify</h3>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Click "Identify ISRC"</span>
+    <p>This uses audio fingerprinting to confirm whether tracks are truly identical recordings. Tracks with matching ISRC codes are real duplicates. This step is optional but recommended for accuracy.</p>
+  </div>
+
+  <div class="tip">ISRC (International Standard Recording Code) is a unique identifier for each recording. Two tracks with the same ISRC are the same recording. Different ISRCs mean different recordings (e.g., studio vs. live version).</div>
+
+  <h3>Phase 3 &mdash; Select</h3>
+  <div class="step">
+    <span class="step-number">3</span><span class="step-title">Expand groups and pick keepers</span>
+    <p>Click a group to see the comparison table: bitrate, file size, format, rating. Click <strong>"Keep Best"</strong> to auto-select the highest quality version, or manually mark your keeper with the checkmark icon.</p>
+  </div>
+
+  <h3>Phase 4 &mdash; Transfer &amp; Delete</h3>
+  <div class="step">
+    <span class="step-number">4</span><span class="step-title">Transfer ratings first, then delete</span>
+    <p>If the track you're deleting has a rating, transfer it to the keeper first using the transfer button. Then click <strong>"Delete Flagged Tracks"</strong> to remove all non-keepers in batch.</p>
+  </div>
+
+  <div class="warning">Always transfer ratings before deleting. Once a track is deleted, its rating is gone forever.</div>
+
+  <!-- ======== STEP 4: LOSSLESS ======== -->
+  <h2>Step 4 &mdash; Lossless Upgrade</h2>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Click "Scan"</span>
+    <p>Finds all Apple Music tracks still in compressed AAC format that have lossless versions available.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Filter by playlist (optional)</span>
+    <p>Use the dropdown to focus on a specific playlist if you don't want to upgrade everything at once.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span><span class="step-title">Click "Upgrade All"</span>
+    <p>MusicLibrarian removes the local AAC download. Apple Music automatically re-downloads in lossless (ALAC) format. Make sure lossless is enabled in Music &gt; Settings &gt; Playback.</p>
+  </div>
+
+  <div class="tip">After upgrading, give Apple Music some time to re-download all tracks. The re-download happens in the background.</div>
+
+  <!-- ======== STEP 5: ARTWORK ======== -->
+  <h2>Step 5 &mdash; Artwork Repair</h2>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Click "Scan Artwork"</span>
+    <p>Detects albums with missing artwork, very low quality (&lt;300px), low quality (&lt;600px), or generic compilation covers.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Click "Find All"</span>
+    <p>Searches the Apple Music catalog for high-resolution artwork for each album.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span><span class="step-title">Click "Apply All"</span>
+    <p>Downloads and applies HD artwork to all matched albums in one click.</p>
+  </div>
+
+  <!-- ======== STEP 6: METADATA ======== -->
+  <h2>Step 6 &mdash; Metadata Fixer</h2>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Click "Scan"</span>
+    <p>Detects three types of issues: non-Latin characters (e.g., Chinese/Arabic titles), misspelled artist names, and garbled/corrupted text.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Click "Verify All"</span>
+    <p>Cross-references each issue with the Apple Music catalog to find the correct metadata.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span><span class="step-title">Click "Apply All Verified"</span>
+    <p>Updates track metadata with verified corrections.</p>
+  </div>
+
+  <!-- ======== STEP 7: INHERITED RATINGS ======== -->
+  <h2>Step 7 &mdash; Inherited Ratings</h2>
+  <div class="step">
+    <span class="step-number">1</span><span class="step-title">Review inherited ratings</span>
+    <p>Apple Music gives every track on an album the same rating when you rate just a few tracks. These "gray" ratings pollute your smart playlists. MusicLibrarian finds them all.</p>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span><span class="step-title">Click "Reset to 0"</span>
+    <p>Resets all inherited (gray) ratings to unrated. Your personal (red) ratings are preserved.</p>
+  </div>
+
+  <!-- ======== CTA ======== -->
+  <div class="cta-box">
+    <p style="font-size:22px;font-weight:700;margin-bottom:16px;">Ready to clean your library?</p>
+    <a href="https://thevaultdj.com">Download MusicLibrarian</a>
+  </div>
+
+  <p style="text-align:center;color:var(--text2);font-size:14px;">&copy; 2026 <a href="https://thevaultdj.com" style="color:var(--text2);">thevaultdj.com</a></p>
+
+</div>
+</body>
+</html>
