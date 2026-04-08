@@ -1170,11 +1170,33 @@
 </head>
 <body>
 
-  <!-- Easter Promo Banner -->
+  <!-- Easter Promo Banner with Countdown -->
   <div id="easter-banner" style="background: linear-gradient(135deg, #6f42c1, #e84393); color: white; text-align: center; padding: 12px 20px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; font-size: 15px; font-weight: 600; position: relative; z-index: 1000;">
-    🐣 <span data-i18n="banner.easter">Easter Sale — 40% off Pro license! Use code</span> <code style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-size: 14px;">EASTER2026</code> <span data-i18n="banner.easter2">at checkout. Valid until April 21.</span>
+    🐣 <span data-i18n="banner.easter">Easter Sale — 40% off Pro license! Use code</span> <code style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-size: 14px;">EASTER2026</code>
+    <span style="margin-left: 6px;">⏰</span> <span id="easter-countdown" style="font-variant-numeric: tabular-nums;"></span>
     <a href="https://serged6.gumroad.com/l/ipktis" style="color: white; text-decoration: underline; margin-left: 8px;" data-i18n="banner.easter.cta">Get it now →</a>
   </div>
+  <script>
+    (function() {
+      var end = new Date('2026-04-21T23:59:59').getTime();
+      var el = document.getElementById('easter-countdown');
+      function update() {
+        var now = new Date().getTime();
+        var diff = end - now;
+        if (diff <= 0) {
+          document.getElementById('easter-banner').style.display = 'none';
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        el.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's left';
+        requestAnimationFrame(update);
+      }
+      update();
+    })();
+  </script>
 
   <!-- ========================================
        SECTION 1: HERO
