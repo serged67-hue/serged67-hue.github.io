@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - TheVaultDJ Upload Automation</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #333; line-height: 1.6; }
+    h1 { color: #111; } h2 { color: #222; margin-top: 2em; } h3 { color: #333; } p, li { margin-bottom: 0.5em; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #ddd; color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <p><strong>TheVaultDJ Upload Automation</strong></p>
+
+  <h2>Data Collection</h2>
+  <p>This application collects minimal data and operates with strict privacy principles.</p>
+
+  <h3>What We Don't Collect</h3>
+  <ul>
+    <li>Personal information (name, email, phone, address)</li>
+    <li>Browsing history or activity logs</li>
+    <li>Device identifiers or IP addresses (beyond API logs)</li>
+    <li>Location data</li>
+    <li>Payment information</li>
+  </ul>
+
+  <h3>What We Store (Encrypted)</h3>
+  <p>This application stores the following on a secure VPS for operational purposes only:</p>
+  <ul>
+    <li><strong>OAuth Tokens:</strong> TikTok API refresh tokens (encrypted storage)</li>
+    <li><strong>API Credentials:</strong> Client ID and Client Secret (never shared, never logged)</li>
+    <li><strong>Upload Metadata:</strong> Video titles, descriptions, hashtags (used only for posting)</li>
+  </ul>
+
+  <h2>Data Security</h2>
+  <ul>
+    <li>All credentials stored with file-level encryption (chmod 600)</li>
+    <li>No unencrypted plaintext credentials in logs or config files</li>
+    <li>OAuth 2.0 authentication (secure token-based access)</li>
+    <li>No third-party access to stored data</li>
+    <li>Regular security audits of credential storage</li>
+  </ul>
+
+  <h2>TikTok API Privacy</h2>
+  <p>This application uses the official TikTok Content Posting API, which means:</p>
+  <ul>
+    <li>All data transmitted to TikTok is governed by TikTok's Privacy Policy</li>
+    <li>Video content posted is subject to TikTok's Content Moderation</li>
+    <li>User account data remains controlled by the user and TikTok</li>
+    <li>This application acts as a tool, not a data intermediary</li>
+  </ul>
+
+  <h2>Data Deletion</h2>
+  <p>You can request deletion of stored credentials at any time by:</p>
+  <ol>
+    <li>Stopping the application</li>
+    <li>Deleting the credentials directory on the VPS</li>
+    <li>Revoking API access in your TikTok Developer settings</li>
+  </ol>
+
+  <h2>Third-Party Services</h2>
+  <p>This application integrates with:</p>
+  <ul>
+    <li><strong>TikTok API</strong> - Data sent to TikTok is governed by their Privacy Policy</li>
+    <li><strong>No other third parties</strong> - No data is shared with analytics, tracking, or advertising services</li>
+  </ul>
+
+  <h2>Changes to Privacy Policy</h2>
+  <p>This policy may be updated at any time. Changes will be reflected with updated timestamps.</p>
+
+  <div class="footer">
+    <p><strong>Creator:</strong> Serge (@serged67)<br>
+    <strong>Last Updated:</strong> April 2026<br>
+    <strong>Questions?</strong> Contact via GitHub: github.com/serged67</p>
+  </div>
+</body>
+</html>
